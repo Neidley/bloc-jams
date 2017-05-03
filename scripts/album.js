@@ -12,6 +12,7 @@ var albumPicasso = {
          { title: 'Magenta', duration: '2:15'}
      ]
  };
+
  var albumMarconi = {
     title: 'The Telephone',
     artist: 'Guglielmo Marconi',
@@ -27,6 +28,21 @@ var albumPicasso = {
     ]
 };
 
+var albumGlassAnimals = {
+   title: 'How to Be a Human Being',
+   artist: 'Glass Animals',
+   label: 'EM',
+   year: '2016',
+   albumArtUrl: 'http://www.radioutd.com/blog/wp-content/uploads/2016/08/image.jpeg',
+   songs: [
+       { title: 'Life Itself', duration: '4:41' },
+       { title: 'Youth', duration: '3:50' },
+       { title: 'Season 2 Episode 3', duration: '4:03'},
+       { title: 'Pork Soda', duration: '4:13' },
+       { title: 'Mama\'s Gun', duration: '4:26'}
+   ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
        '<tr class="album-view-song-item">'
@@ -39,14 +55,14 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 var setCurrentAlbum = function(album) {
      // #1
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
-
      // #2
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -64,4 +80,14 @@ var setCurrentAlbum = function(album) {
 
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+
+    var albums = [albumPicasso, albumMarconi, albumGlassAnimals]
+    var index = 1;
+    albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(albums[index]);
+        index++;
+        if (index == albums.length) {
+            index = 0;
+        }
+    });
  };
