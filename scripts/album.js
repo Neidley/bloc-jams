@@ -91,7 +91,6 @@ var createSongRow = function(songNumber, songName, songLength) {
         if (songNumber !== currentlyPlayingSongNumber) {
             songNumberCell.html(songNumber);
         }
-        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
     };
 
     $row.find('.song-item-number').click(clickHandler);
@@ -127,12 +126,10 @@ var filterTimeCode = function(timeInSeconds) {
 };
 
 var setCurrentTimeInPlayerBar = function(currentTime) {
-    var currentTime = buzz.toTimer(currentSoundFile.getTime()); // 01:30
     filterTimeCode($('.current-time').text(currentTime));
 };
 
 var setTotalTimeInPlayerBar = function(totalTime) {
-    var totalTime = buzz.toTimer(currentSoundFile.getDuration()); // 05:46
     filterTimeCode($('.total-time').text(totalTime));
 };
 
@@ -145,7 +142,7 @@ var updateSeekBarWhileSongPlays = function() {
             var $seekBar = $('.seek-control .seek-bar');
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
-            setCurrentTimeInPlayerBar();
+            setCurrentTimeInPlayerBar(buzz.toTimer(this.getTime()));
         });
     }
 };
@@ -273,7 +270,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    setTotalTimeInPlayerBar();
+    setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.duration));
 };
 
 var togglePlayFromPlayerBar = function() {
