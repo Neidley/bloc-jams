@@ -120,18 +120,18 @@ var setCurrentAlbum = function(album) {
     }
 };
 
-var filterTimeCode() = function(timeInSeconds) {
-    var wholeSeconds = Math.floor(parseFloat(songLength % 60));
-    var wholeMinutes = Math.floor(parseFloat(songLength / 60));
-    var timeInSeconds = wholeMinutes + ':' + wholeSeconds;
+var filterTimeCode = function(timeInSeconds) {
+    var wholeSeconds = Math.floor(parseFloat(timeInSeconds % 60));
+    var wholeMinutes = Math.floor(parseFloat(timeInSeconds / 60));
+    return wholeMinutes + ':' + wholeSeconds;
 };
 
-var setCurrentTimeInPlayerBar() = function(currentTime) {
+var setCurrentTimeInPlayerBar = function(currentTime) {
     var currentTime = buzz.toTimer(currentSoundFile.getTime()); // 01:30
     filterTimeCode($('.current-time').text(currentTime));
 };
 
-var setTotalTimeinPlayerBar() = function(totalTime) {
+var setTotalTimeInPlayerBar = function(totalTime) {
     var totalTime = buzz.toTimer(currentSoundFile.getDuration()); // 05:46
     filterTimeCode($('.total-time').text(totalTime));
 };
