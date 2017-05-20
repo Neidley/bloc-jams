@@ -142,6 +142,7 @@ var updateSeekBarWhileSongPlays = function() {
             var $seekBar = $('.seek-control .seek-bar');
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
+
             setCurrentTimeInPlayerBar(buzz.toTimer(this.getTime()));
         });
     }
