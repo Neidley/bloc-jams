@@ -132,7 +132,7 @@ var setCurrentTimeInPlayerBar = function(currentTime) {
 };
 
 var setTotalTimeInPlayerBar = function(totalTime) {
-    var totalTime = buzz.toTimer(currentSoundFile.getDuration()); // 05:46
+    var totalTime = buzz.toTimer(currentSongFromAlbum.duration); // 05:46
     filterTimeCode($('.total-time').text(totalTime));
 };
 
@@ -145,7 +145,7 @@ var updateSeekBarWhileSongPlays = function() {
             var $seekBar = $('.seek-control .seek-bar');
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
-            setCurrentTimeInPlayerBar();
+            setCurrentTimeInPlayerBar(buzz.toTimer(currentSoundFile.getTime()));
         });
     }
 };
@@ -273,7 +273,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    setTotalTimeInPlayerBar();
+    setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.duration));
 };
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
